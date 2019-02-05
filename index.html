@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta http-equiv="content-type" content="text/html; charset=UTF-8" />
+    <title>Title</title>
+    <script src="js/jquery-3.3.1.js"></script>
+    <link rel="stylesheet" type="text/css" href="style.scss">
+</head>
+<body>
+<script src="js/three.min.js"></script>
+<script src="js/obj2three.js"></script>
+<script>
+    var scene = new THREE.Scene();  //创建环境
+    var camera = new THREE.PerspectiveCamera(75,window.innerWidth/window.innerHeight); //创建camera( 75是angle)
+
+    var renderer = new THREE.WebGLRenderer({antialias: true}); //renderer渲染器 antialias平滑效果
+    renderer.setSize(window.innerWidth,window.innerHeight);
+    $('body').append(renderer.domElement);
+
+    var geometry = new THREE.BoxGeometry(.5,.5,.5); //创建cube
+    var material = new THREE.MeshBasicMaterial({color: 0xff0000});
+    var cube = new THREE.Mesh(geometry,material);
+    scene.add(cube);
+
+    cube.position.z = -5;
+    cube.rotation.x = 8;
+        var animate = function(){       //添加animation
+            cube.rotation.x += 0.005;
+            renderer.render(scene,camera);
+            requestAnimationFrame(animate);
+        }
+        animate();
+    cube.rotation.y = 5;
+
+
+    renderer.render(scene,camera);
+</script>
+</body>
+</html>
